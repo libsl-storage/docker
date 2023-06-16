@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "lsldb"
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  core:
+    image: haveaheart/libsl-core:main
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    #volumes:
+    #  - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_URL=${DB_URL}
+      - SECURITY_KEY=${SECURITY_KEY}
+      - SUPERUSER_NAME=${SUPERUSER_NAME}
+      - SUPERUSER_EMAIL=${SUPERUSER_EMAIL}
+      - SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+
+  ui:
+    image: haveaheart/libsl-ui:main
+    depends_on:
+      - core
+    ports:
+      - "80:80"
+    environment:
+      - VUE_APP_ROOT_API=${VUE_APP_ROOT_API}
+
+volumes:
+  postgres-data:
