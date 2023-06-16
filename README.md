@@ -14,3 +14,4 @@ Docker-compose файл для деплоя libsl-storage.
   - SUPERUSER_PASSWORD: пароль суперпользователя проекта
   - VUE_APP_ROOT_API: ссылка к backend'у в формате http://HOSTNAME:PORT
   - ALLOWED_ORIGINS: перечисление хостов, из которых возможен доступ к backend'у в формате http://HOSTNAME:PORT,http://HOSTNAME:PORT...
+- Выполнить docker-compose up
