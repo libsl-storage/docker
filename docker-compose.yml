@@ -13,9 +13,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "8080:8080"
-    #volumes:
-    #  - /var/run/docker.sock:/var/run/docker.sock
+      - "6001:8080"
     environment:
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
@@ -31,9 +29,6 @@ services:
     depends_on:
       - core
     ports:
-      - "80:80"
-    environment:
-      - VUE_APP_ROOT_API=${VUE_APP_ROOT_API}
-
+      - "6000:80"
 volumes:
   postgres-data:
